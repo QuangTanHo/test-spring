@@ -24,15 +24,22 @@ public class Apartment {
 	  @GeneratedValue(strategy = GenerationType.AUTO)
 	  private long id;
 
-	  @Column(name = "district")
-	  private String district;
+	  @Column(name = "district_id")
+	  private String districtId;
 	  
 	  @Column(name = "acreage")
 	  private Double acreage;
 	  
-	  @Column(name = "average_price")
-	  private Double averagePrice;
+	  @Column(name = "square_metre")
+	  private Double squareMetre;
+	  
+	  @Column(name = "price")
+	  private Double price;
 
 	  @Column(name = "description")
 	  private String description;
+	  
+	  
+	  
+	  
 }
