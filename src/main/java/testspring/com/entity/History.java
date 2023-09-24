@@ -12,18 +12,19 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "HISTORY")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class History {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -34,9 +35,20 @@ public class History {
 	@Column(name = "user_id")
 	private Long userId;
 
+	@Column(name = "del_flg")
+	private String delFlg = "0";
+
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "create_date", updatable = false)
+	@Column(name = "create_date", updatable = true)
 	private Date createDate;
+
+	@UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "update_date", insertable = true)
+	private Date updateDate;
+
+	@Column(name = "update_by", insertable = false)
+	private Integer updateBy;
 
 }

@@ -1,4 +1,5 @@
 package testspring.com.entity;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -18,29 +19,35 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "HOME")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-	
+public class Home {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	@Column(name = "user_name")
-	private String name;
-	
-	@Column(name = "email")
-	private String email;
-	
-	@Column(name = "password")
-	private String password;
-	
+	private long id;
+
+	@Column(name = "district_id")
+	private Long districtId;
+
+	@Column(name = "acreage")
+	private Double acreage;
+
+	@Column(name = "price")
+	private Double price;
+
+	@Column(name = "description")
+	private String description;
+
+	@Column(name = "del_flg")
+	private String delFlg = "0";
+
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "create_date", updatable = false)
-	private Date createDate;	
+	private Date createDate;
 
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
@@ -49,5 +56,5 @@ public class User {
 
 	@Column(name = "update_by", insertable = false)
 	private Integer updateBy;
-	
+
 }

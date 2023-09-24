@@ -2,6 +2,7 @@ package testspring.com.serivce.impl;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.data.domain.Page;
@@ -25,27 +26,27 @@ public class HistoryServiceImpl implements HistoryService {
 
 	@Override
 	public Page<History> getHistory(Long userId, Date DateF, Date DateT, int page, int size) {
-
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Pageable paging = PageRequest.of(page, size);
 		Page<History> pageHistory;
+		//covert date => Timestamp
+		Timestamp dateFrom = DateF == null ? null : new Timestamp(DateF.getTime());
+		Timestamp dateTo = DateT == null ? null : this.getEndOfDayTimestamp(DateT);
 		
-		if (userId == null)
-			pageHistory = historyRepository.findAll(paging);
-		else {
-			String dateFrom = DateF == null? null:  dateFormat.format(DateF);
-			String dateTo = DateT ==null? null: dateFormat.format(DateT);
-			
-//			pageHistory = historyRepository.findByCreateDate(userId, dateFrom, dateTo, paging);
-			
-//			Timestamp dateFrom = new Timestamp(DateF.getTime());
-//			Timestamp dateTo = new Timestamp(DateT.getTime());
-			
-			pageHistory = historyRepository.findByCreateDate(userId, dateFrom, dateTo, paging);
-		}
-
+		pageHistory = historyRepository.findByCreateDate(userId, dateFrom, dateTo, paging);
 
 		return new PageImpl<>(pageHistory.getContent(), pageHistory.getPageable(), pageHistory.getTotalElements());
 
+	}
+
+	public Timestamp getEndOfDayTimestamp(Date endDate) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(endDate);
+		calendar.set(Calendar.HOUR_OF_DAY, 23);
+		calendar.set(Calendar.MINUTE, 59);
+		calendar.set(Calendar.SECOND, 59);
+		calendar.set(Calendar.MILLISECOND, 0);
+		Date endOfDay = calendar.getTime();
+
+		return new Timestamp(endOfDay.getTime());
 	}
 }

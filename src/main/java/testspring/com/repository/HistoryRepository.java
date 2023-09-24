@@ -14,14 +14,9 @@ import testspring.com.entity.History;
 @Repository
 public interface HistoryRepository extends JpaRepository<History, Long> {
 
-//	 @Query("SELECT e FROM History e "
-//	          + "WHERE (Date(e.createDate) >= Date(:dateFrom)) AND (DATE(e.createDate) <= Date(:dateTo)) AND (e.userId is null or e.userId = :userId) "
-//	          + "ORDER BY e.createDate DESC")
-//	 Page<History> findByCreateDate( @Param("userId") Long userId,@Param("dateFrom") String dateFrom, @Param("dateTo") String dateTo,Pageable pageable);
-//	
 	 @Query("SELECT e FROM History e "
-	          + "WHERE (:dateFrom IS NULL OR DATE(e.createDate) >= DATE(:dateFrom)) AND (:dateTo IS NULL OR DATE(e.createDate) <= DATE(:dateTo)) AND (e.userId is null or e.userId = :userId) "
+	          + "WHERE (:dateFrom IS NULL OR e.createDate >= :dateFrom) AND (:dateTo IS NULL OR e.createDate <= :dateTo) AND (:userId is null or e.userId = :userId) AND (e.delFlg= 0)"
 	          + "ORDER BY e.createDate DESC")
-	 Page<History> findByCreateDate( @Param("userId") Long userId,@Param("dateFrom") String  dateFrom, @Param("dateTo") String  dateTo,Pageable pageable);
+	 Page<History> findByCreateDate( @Param("userId") Long userId,  @Param("dateFrom") Timestamp  dateFrom, @Param("dateTo") Timestamp  dateTo,Pageable pageable);
 
 }

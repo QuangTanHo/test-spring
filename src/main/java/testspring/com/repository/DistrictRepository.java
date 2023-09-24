@@ -5,10 +5,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import testspring.com.entity.Apartment;
+import testspring.com.entity.District;
 
 @Repository
-public interface ApartmentRepository extends JpaRepository<Apartment, Long>{
+public interface DistrictRepository extends JpaRepository<District, Long>{
 	
-	Page<Apartment> findByAveragePrice (Double averagePrice , Pageable pageable);
+	Page<District> findByDelFlg (String delFlg , Pageable pageable);
+	District findByIdAndDelFlg(Long id,String delFlg);
 }

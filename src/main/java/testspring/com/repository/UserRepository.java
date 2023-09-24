@@ -7,6 +7,6 @@ import testspring.com.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>  {
 
-	Boolean existsByEmail(String email);
+//	Boolean existsByEmail(String email);
 	public User findByEmail(String email);
 }
