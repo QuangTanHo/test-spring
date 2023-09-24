@@ -19,22 +19,22 @@ import testspring.com.serivce.HistoryService;
 @RestController
 @RequestMapping("api/history")
 public class HistoryController {
-	
-	private HistoryService historyService;
-	
+
+	private final HistoryService historyService;
+
 	public HistoryController(HistoryService historyService) {
 		this.historyService = historyService;
 	}
 
 	@GetMapping("")
-	public ResponseEntity<?> getHistory(@RequestParam(required = false) Long userId, @RequestParam(required = false) Date dateFrom,
-			@RequestParam(required = false) Date dateTo, @RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "5") int size) {
+	public ResponseEntity<?> getHistory(@RequestParam(required = false) Long userId,
+			@RequestParam(required = false) Date dateFrom, @RequestParam(required = false) Date dateTo,
+			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
 		Page<History> historyReponse = this.historyService.getHistory(userId, dateFrom, dateTo, page, size);
 		HttpHeaders headers = PaginationUtils
-                .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), historyReponse);
+				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), historyReponse);
 		return new ResponseEntity<>(PaginationUtils.generatePage(historyReponse), headers, HttpStatus.OK);
 
 	}
-    
+
 }

@@ -26,11 +26,11 @@ CREATE TABLE `district` (
   `id` bigint NOT NULL,
   `average_price` double DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
-  `del_flg` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `update_by` int DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
+  `is_delete` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -41,7 +41,7 @@ CREATE TABLE `district` (
 
 LOCK TABLES `district` WRITE;
 /*!40000 ALTER TABLE `district` DISABLE KEYS */;
-INSERT INTO `district` VALUES (1,1000,'2023-09-24 07:24:18','0','kv hai chau','hai chau',NULL,NULL),(2,2000,'2023-09-24 07:25:46','0','kv thanh khe','thanh khe',NULL,NULL),(3,3000,'2023-09-24 07:26:01','0','kv son tra','son tra',NULL,NULL),(4,4000,'2023-09-24 07:26:35','0','kv lien chieu','lien chieu',NULL,NULL),(5,5000,'2023-09-24 07:26:57','0','kv hoa vang','hoa vang',NULL,NULL),(6,100,'2023-09-24 07:27:15','0','kv hoang sa','hoang sa',NULL,NULL);
+INSERT INTO `district` VALUES (1,100,'2023-09-24 15:33:28','kv hai chau','hai chau',NULL,'2023-09-24 15:33:28',_binary '\0'),(2,200,'2023-09-24 15:33:28','kv thanh khe','thanh khe',NULL,'2023-09-24 15:33:28',_binary '\0'),(3,300,'2023-09-24 15:33:28','kv son tra','son tra',NULL,'2023-09-24 15:33:28',_binary '\0'),(4,300,'2023-09-24 15:33:28','kv lien chieu','lien chieu',NULL,'2023-09-24 15:33:28',_binary '\0'),(5,300,'2023-09-24 15:33:28','kv hoa vang','hoa vang',NULL,'2023-09-24 15:33:28',_binary '\0'),(6,3001,'2023-09-24 15:33:28','kv hoang sa','hoang sa',NULL,'2023-09-24 15:33:28',_binary '\0');
 /*!40000 ALTER TABLE `district` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,7 +63,7 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (9);
+INSERT INTO `hibernate_sequence` VALUES (41);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,11 +77,11 @@ DROP TABLE IF EXISTS `history`;
 CREATE TABLE `history` (
   `id` bigint NOT NULL,
   `create_date` datetime DEFAULT NULL,
-  `del_flg` varchar(255) DEFAULT NULL,
   `keyword` varchar(255) DEFAULT NULL,
   `update_by` int DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
   `user_id` bigint DEFAULT NULL,
+  `is_delete` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -92,7 +92,7 @@ CREATE TABLE `history` (
 
 LOCK TABLES `history` WRITE;
 /*!40000 ALTER TABLE `history` DISABLE KEYS */;
-INSERT INTO `history` VALUES (5,'2023-09-24 09:41:47','0','200000.0',NULL,'2023-09-24 09:41:47',1),(6,'2023-09-24 09:41:59','0','1800000.0',NULL,'2023-09-24 09:41:59',1),(7,'2023-09-24 09:42:48','0','3200000.0',NULL,'2023-09-24 09:42:48',2),(8,'2023-09-24 09:42:58','0','800000.0',NULL,'2023-09-24 09:42:58',2);
+INSERT INTO `history` VALUES (1,'2023-09-22 15:54:18','80000.0',NULL,'2023-09-24 15:54:18',2,_binary '\0'),(2,'2023-09-21 15:54:18','90000.0',NULL,'2023-09-24 15:54:18',2,_binary '\0'),(3,'2023-09-23 15:54:18','90000.0',NULL,'2023-09-24 15:54:18',2,_binary '\0'),(4,'2023-09-24 15:54:18','80000.0',NULL,'2023-09-24 15:54:18',2,_binary '\0'),(5,'2023-09-24 15:54:18','80000.0',NULL,'2023-09-24 15:54:18',2,_binary '\0'),(6,'2023-09-24 15:54:26','90000.0',NULL,'2023-09-24 15:54:26',2,_binary '\0'),(7,'2023-09-24 15:54:30','80000.0',NULL,'2023-09-24 15:54:30',2,_binary '\0'),(8,'2023-09-24 16:27:56','1.2E7',NULL,'2023-09-24 16:27:56',1,_binary '\0'),(9,'2023-09-24 16:28:01','1.8E7',NULL,'2023-09-24 16:28:01',1,_binary '\0'),(10,'2023-09-24 16:30:03','7000000.0',NULL,'2023-09-24 16:30:03',1,_binary '\0');
 /*!40000 ALTER TABLE `history` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,12 +107,12 @@ CREATE TABLE `home` (
   `id` bigint NOT NULL,
   `acreage` double DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
-  `del_flg` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `district_id` bigint DEFAULT NULL,
   `price` double DEFAULT NULL,
   `update_by` int DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
+  `is_delete` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -123,7 +123,7 @@ CREATE TABLE `home` (
 
 LOCK TABLES `home` WRITE;
 /*!40000 ALTER TABLE `home` DISABLE KEYS */;
-INSERT INTO `home` VALUES (1,200,'2023-09-24 09:38:47','0','kv Hai Chau',1,200000,NULL,NULL),(2,400,'2023-09-24 09:39:03','0','kv thanh khe',2,800000,NULL,NULL),(3,600,'2023-09-24 09:39:28','0','kv Son tra',3,1800000,NULL,NULL),(4,800,'2023-09-24 09:39:41','0','kv Lien Chieu',4,3200000,NULL,NULL);
+INSERT INTO `home` VALUES (1,800,'2023-09-24 15:52:05','kv Hai chau',1,80000,NULL,'2023-09-24 15:52:05',_binary '\0'),(2,300,'2023-09-24 15:52:14','kv Thanh Khê',2,90000,NULL,'2023-09-24 15:52:14',_binary '\0'),(3,300,'2023-09-24 15:52:25','kv Lien Chieu',4,90000,NULL,'2023-09-24 15:52:25',_binary '\0'),(4,60000,'2023-09-24 16:26:50','kv son tra',3,18000000,NULL,'2023-09-24 16:26:50',_binary '\0'),(5,60000,'2023-09-24 16:27:06','kv Thanh Khe',2,12000000,NULL,'2023-09-24 16:27:06',_binary '\0'),(6,70000,'2023-09-24 16:29:16','kv Hai Chau',1,7000000,NULL,'2023-09-24 16:29:16',_binary '\0');
 /*!40000 ALTER TABLE `home` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,6 +142,7 @@ CREATE TABLE `user` (
   `password` varchar(255) DEFAULT NULL,
   `update_by` int DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
+  `is_delete` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -152,7 +153,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'2023-09-24 07:24:18','quangtan1197@gmail.com','TanHQ','123456',NULL,'2023-09-24 07:24:18'),(2,'2023-09-24 07:24:18','quangtan11972@gmail.com','TanHQ1','123456',NULL,'2023-09-24 07:24:18');
+INSERT INTO `user` VALUES (1,'2023-09-24 07:24:18','quangtan1197@gmail.com','TanHQ','123456',NULL,'2023-09-24 07:24:18',NULL),(2,'2023-09-24 07:24:18','quangtan11972@gmail.com','TanHQ1','123456',NULL,'2023-09-24 07:24:18',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -165,4 +166,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-24 10:38:34
+-- Dump completed on 2023-09-24 16:51:30

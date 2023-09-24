@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 import testspring.com.entity.District;
 
 @Repository
-public interface DistrictRepository extends JpaRepository<District, Long>{
-	
-	Page<District> findByDelFlg (String delFlg , Pageable pageable);
-	District findByIdAndDelFlg(Long id,String delFlg);
+public interface DistrictRepository extends JpaRepository<District, Long> {
+	String TABLE = "district";
+
+	Page<District> findByIsDelete(Boolean isDelete, Pageable pageable);
+
+	District findByIdAndIsDelete(Long id, Boolean isDelete);
 }

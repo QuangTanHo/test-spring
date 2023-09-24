@@ -8,11 +8,12 @@ import org.springframework.stereotype.Repository;
 import testspring.com.entity.Home;
 
 @Repository
-public interface HomeRepository extends JpaRepository<Home, Long>{
-	
-	Page<Home> findByDelFlg (String delFlg , Pageable pageable);
-	
-	Page<Home> findByPriceAndDelFlg (Double price,String delFlg , Pageable pageable);
-	
-	Home findByIdAndDelFlg(Long id,String delFlg);
+public interface HomeRepository extends JpaRepository<Home, Long> {
+	String TABLE = "home";
+
+	Page<Home> findByIsDelete(Boolean isDelete, Pageable pageable);
+
+	Page<Home> findByPriceAndIsDelete(Double price, Boolean isDelete, Pageable pageable);
+
+	Home findByIdAndIsDelete(Long id, Boolean isDelete);
 }

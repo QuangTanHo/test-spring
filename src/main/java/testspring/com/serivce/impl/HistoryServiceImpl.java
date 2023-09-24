@@ -1,8 +1,8 @@
 package testspring.com.serivce.impl;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 import org.springframework.data.domain.Page;
@@ -25,28 +25,18 @@ public class HistoryServiceImpl implements HistoryService {
 	}
 
 	@Override
-	public Page<History> getHistory(Long userId, Date DateF, Date DateT, int page, int size) {
+	public Page<History> getHistory(Long userId, Date dateF, Date dateT, int page, int size) {
 		Pageable paging = PageRequest.of(page, size);
 		Page<History> pageHistory;
-		//covert date => Timestamp
-		Timestamp dateFrom = DateF == null ? null : new Timestamp(DateF.getTime());
-		Timestamp dateTo = DateT == null ? null : this.getEndOfDayTimestamp(DateT);
-		
+
+		LocalDateTime dateFrom = dateF.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		LocalDateTime dateTo = dateT.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
+				.with(LocalTime.of(23, 59, 59));
+
 		pageHistory = historyRepository.findByCreateDate(userId, dateFrom, dateTo, paging);
 
 		return new PageImpl<>(pageHistory.getContent(), pageHistory.getPageable(), pageHistory.getTotalElements());
 
 	}
 
-	public Timestamp getEndOfDayTimestamp(Date endDate) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(endDate);
-		calendar.set(Calendar.HOUR_OF_DAY, 23);
-		calendar.set(Calendar.MINUTE, 59);
-		calendar.set(Calendar.SECOND, 59);
-		calendar.set(Calendar.MILLISECOND, 0);
-		Date endOfDay = calendar.getTime();
-
-		return new Timestamp(endOfDay.getTime());
-	}
 }

@@ -20,24 +20,24 @@ public class Paging<T> {
 		this.content = page.getContent();
 	}
 
-    public long getTotalPages() {
-        return totalPages;
-    }
+	public long getTotalPages() {
+		return totalPages;
+	}
 
-    public long getTotalElements() {
-        return totalElements;
-    }
+	public long getTotalElements() {
+		return totalElements;
+	}
 
-    public long getPageSize() {
-        return pageSize;
-    }
+	public long getPageSize() {
+		return pageSize;
+	}
 
-    public long getPageNumber() {
-        return pageNumber;
-    }
+	public long getPageNumber() {
+		return pageNumber;
+	}
 
-    public List<T> getContent() {
-        return content;
-    }
+	public List<T> getContent() {
+		return content;
+	}
 
 }

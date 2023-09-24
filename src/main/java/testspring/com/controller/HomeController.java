@@ -1,6 +1,5 @@
 package testspring.com.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,8 +22,13 @@ import testspring.com.serivce.HomeService;
 @RequestMapping("api/home")
 public class HomeController {
 
-	@Autowired
-	private HomeService homeService;
+	
+	private  final HomeService homeService;
+
+	
+	public HomeController(HomeService homeService) {
+		this.homeService = homeService;
+	}
 
 	@GetMapping("")
 	public ResponseEntity<?> getPriceHome(@RequestParam(required = false) Double price,
