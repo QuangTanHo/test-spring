@@ -16,8 +16,8 @@
 -Eclipse
 
 ## Run-Project
- - clone pr0jet
- -Run eclipse  => import folder => run with với spring boot
+ - clone projet
+ - Run eclipse  => import folder => run with với spring boot
 ## Data
  - test-spring\sql\danang-home.sql
 
